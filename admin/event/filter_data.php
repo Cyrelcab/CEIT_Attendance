@@ -1,7 +1,7 @@
 <?php
 // Ensure no output before the headers
 ob_start();
-require_once('./classes/DBConnection.php'); // Make sure this file includes your database connection setup
+require_once('.../classes/DBConnection.php'); // Make sure this file includes your database connection setup
 
 // Enable error reporting
 error_reporting(E_ALL);
