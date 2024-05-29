@@ -221,7 +221,7 @@ $yrlevel_qry = $conn->query("SELECT DISTINCT year_level FROM event_audience ORDE
 		var data = form.serialize();
 
 		$.ajax({
-			url: 'localhost/event/admin/audience/filter_data.php',
+			url: 'http://localhost/event/admin/audience/filter_data.php',
 			method: 'GET',
 			data: data,
 			dataType: 'json',
@@ -235,7 +235,7 @@ $yrlevel_qry = $conn->query("SELECT DISTINCT year_level FROM event_audience ORDE
 						response.forEach(function(row, index) {
 							var tableRow = `
                             <tr>
-                                <th class="text-center">${index++}</th>
+                                <th class="text-center">${index + 1}</th>
                                 <td><b>${row.title}</b></td>
                                 <td><b>${row.name}</b></td>
                                 <td><b>${row.schoolid}</b></td>
@@ -244,8 +244,8 @@ $yrlevel_qry = $conn->query("SELECT DISTINCT year_level FROM event_audience ORDE
                                 <td><b>${row.course}</b></td>
                                 <td><b>${row.year_level}</b></td>
                                 <td>
-                                    <small><b>DateTime Start:</b> ${new Date(row.email).toLocaleString()}</small><br>
-                                    <small><b>DateTime End:</b> ${new Date(row.contact).toLocaleString()}</small><br>
+                                    <small><b>Email:</b> ${row.email}</small><br>
+                                    <small><b>Contact #:</b> ${row.contact}</small><br>
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
