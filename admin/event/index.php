@@ -121,6 +121,7 @@ $yrlevel_qry = $conn->query("SELECT DISTINCT year_level FROM event_list ORDER BY
 							<!--button for filter data-->
 							<div class="col-md-2 mx-2 mb-3">
 								<button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-filter"></i> Filter</button>
+								<button class="btn btn-sm btn-danger" type="submit">Reset</button>
 							</div>
 						</div>
 					</form>
