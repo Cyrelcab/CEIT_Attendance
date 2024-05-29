@@ -271,7 +271,7 @@ $yrlevel_qry = $conn->query("SELECT DISTINCT year_level FROM event_list ORDER BY
 		var data = form.serialize();
 
 		$.ajax({
-			url: './admin/event/filter_data.php',
+			url: 'http://localhost/event/admin/event/filter_data.php',
 			method: 'GET',
 			data: data,
 			dataType: 'json',
