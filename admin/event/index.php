@@ -335,6 +335,7 @@ $yrlevel_qry = $conn->query("SELECT DISTINCT year_level FROM event_list ORDER BY
 				}
 			},
 			error: function(xhr, status, error) {
+				console.log("hello");
 				console.error("AJAX error:", xhr.responseText, status, error);
 			}
 		});
