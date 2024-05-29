@@ -18,13 +18,14 @@ if ($conn->connect_error) {
     exit();
 }
 
+// Get filter parameters from URL or set default values
 $school_year = isset($_GET['school_year']) && $_GET['school_year'] != 'default' ? $_GET['school_year'] : '';
 $department = isset($_GET['department']) && $_GET['department'] != 'default' ? $_GET['department'] : '';
 $course = isset($_GET['course']) && $_GET['course'] != 'default' ? $_GET['course'] : '';
 $year_level = isset($_GET['year_level']) && $_GET['year_level'] != 'default' ? $_GET['year_level'] : '';
 
+// Build WHERE clause based on provided filters
 $where = [];
-
 if ($school_year) {
     $where[] = "school_year = '" . $conn->real_escape_string($school_year) . "'";
 }
@@ -38,16 +39,19 @@ if ($year_level) {
     $where[] = "year_level = '" . $conn->real_escape_string($year_level) . "'";
 }
 
+// Construct the WHERE SQL clause
 $where_sql = '';
 if (count($where) > 0) {
     $where_sql = 'WHERE ' . implode(' AND ', $where);
 }
 
-// $sql = "SELECT * FROM event_audience $where_sql ORDER BY title ASC";
-$sql = "SELECT a.*,e.title FROM event_audience a inner join event_list e on e.id = a.event_id $where_sql order by a.name ASC";
+// Construct the SQL query
+$sql = "SELECT a.*, e.title FROM event_audience a INNER JOIN event_list e ON e.id = a.event_id $where_sql ORDER BY a.name ASC";
 
+// Execute the query
 $result = $conn->query($sql);
 
+// Check if the query was successful
 if ($result === false) {
     // Log the error
     error_log("SQL Error: " . $conn->error);
@@ -58,6 +62,7 @@ if ($result === false) {
     exit();
 }
 
+// Fetch the data from the result set
 $data = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -70,3 +75,4 @@ ob_clean();
 header('Content-Type: application/json');
 echo json_encode($data);
 ob_end_flush();
+?>

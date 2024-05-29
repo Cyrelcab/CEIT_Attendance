@@ -185,7 +185,6 @@ $yrlevel_qry = $conn->query("SELECT DISTINCT year_level FROM event_audience ORDE
 		})
 		$('#list').dataTable()
 
-		// Prevent default form submission and handle with AJAX
 		$('#filterForm').on('submit', function(e) {
 			e.preventDefault(); // Prevent default form submission
 			filterData(); // Call filterData function
@@ -222,7 +221,7 @@ $yrlevel_qry = $conn->query("SELECT DISTINCT year_level FROM event_audience ORDE
 		var data = form.serialize();
 
 		$.ajax({
-			url: 'http://localhost/event/admin/audience/filter_data.php',
+			url: 'localhost/event/admin/audience/filter_data.php',
 			method: 'GET',
 			data: data,
 			dataType: 'json',
@@ -236,30 +235,28 @@ $yrlevel_qry = $conn->query("SELECT DISTINCT year_level FROM event_audience ORDE
 						response.forEach(function(row, index) {
 							var tableRow = `
                             <tr>
-                                <th class="text-center">${index + 1}</th>
-									<td><b>${row.event_id}</b></td>
-									<td><b>${row.name}</b> <span><a href="javascript:void(0)" class="view_data" data-id="<?php echo $row['id'] ?>"><span class="fa fa-qrcode"></span></a></span></td>
-									<td><b>${row.schoolid}</b></td>
-									<td><b>${row.school_year}</b> </td>
-									<td><b>${row.department}</b></td>
-									<td><b>${row.course}</b> </td>
-
-									<td><b>${row.year_level}</b> </td>
-
-									<td>
-										<small> <b>Email:</b> ${row.email}</small><br>
-										<small> <b>Contact #:</b>${row.contact}</small>
-									</td>
-									<td class="text-center">
-										<div class="btn-group">
-											<a href="javascript:void(0)" data-id='${row.id}' class="btn btn-primary btn-flat manage_audience">
-												<i class="fas fa-edit"></i>
-											</a>
-											<button type="button" class="btn btn-danger btn-flat delete_audience" data-id="${row.id}">
-												<i class="fas fa-trash"></i>
-											</button>
-										</div>
-									</td>
+                                <th class="text-center">${index++}</th>
+                                <td><b>${row.title}</b></td>
+                                <td><b>${row.name}</b></td>
+                                <td><b>${row.schoolid}</b></td>
+                                <td><b>${row.school_year}</b></td>
+                                <td><b>${row.department}</b></td>
+                                <td><b>${row.course}</b></td>
+                                <td><b>${row.year_level}</b></td>
+                                <td>
+                                    <small><b>DateTime Start:</b> ${new Date(row.email).toLocaleString()}</small><br>
+                                    <small><b>DateTime End:</b> ${new Date(row.contact).toLocaleString()}</small><br>
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                        <a href="javascript:void(0)" data-id="${row.id}" class="btn btn-primary btn-flat manage_event">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-danger btn-flat delete_event" data-id="${row.id}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
                             </tr>
                         `;
 							tableBody.append(tableRow);
