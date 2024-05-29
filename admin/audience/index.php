@@ -29,7 +29,7 @@ $yrlevel_qry = $conn->query("SELECT DISTINCT year_level FROM event_audience ORDE
 		<div class="card-body">
 			<table class="table table-hover table-bordered" id="list">
 				<div class="d-flex justify-content-center align-items-center">
-					<form id="filterForm1" action="" method="GET">
+					<form id="filterForm" action="" method="GET">
 
 						<!-- this is for the school year dropdown--->
 						<div class="col-md-2 mx-2 mb-3">
@@ -186,7 +186,7 @@ $yrlevel_qry = $conn->query("SELECT DISTINCT year_level FROM event_audience ORDE
 		$('#list').dataTable()
 
 		// Prevent default form submission and handle with AJAX
-		$('#filterForm1').on('submit', function(e) {
+		$('#filterForm').on('submit', function(e) {
 			e.preventDefault(); // Prevent default form submission
 			filterData(); // Call filterData function
 		});
